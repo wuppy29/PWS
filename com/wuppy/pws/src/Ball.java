@@ -29,7 +29,7 @@ public class Ball
 	
 	public void update()
 	{
-		
+		y++;
 	}
 	
 	public double getX()

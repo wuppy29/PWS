@@ -7,13 +7,7 @@ public class MouseHandler implements MouseListener
 {
 	public void mouseClicked(MouseEvent e)
 	{
-		int mousex = e.getX();
-		int mousey = e.getY();
 		
-		if(Main.isValidPosition(mousex, mousey))
-		{
-			Main.ballen.add(new Ball(mousex, mousey));
-		}
 	}
 	
 	public void mouseEntered(MouseEvent e)
@@ -33,6 +27,12 @@ public class MouseHandler implements MouseListener
 	
 	public void mouseReleased(MouseEvent e)
 	{
+		int mousex = e.getX();
+		int mousey = e.getY();
 		
+		if(Main.isValidPosition(mousex, mousey))
+		{
+			Main.ballen.add(new Ball(mousex, mousey));
+		}
 	}
 }
