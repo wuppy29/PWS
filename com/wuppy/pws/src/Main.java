@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -17,6 +19,8 @@ public class Main extends Canvas implements Runnable
 	
 	static int width = 600;
 	static int height = 600;
+	
+	static List<Ball> ballen = new ArrayList<Ball>();
 	
 	public static void main(String[] args)
 	{
@@ -42,6 +46,8 @@ public class Main extends Canvas implements Runnable
 		}
 		else
 		{
+			ballen.add(new Ball(50, 50));
+			addMouseListener(new MouseHandler());
 			running = true;
 			thread = new Thread(this);
 			thread.start();
@@ -101,8 +107,13 @@ public class Main extends Canvas implements Runnable
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
+		
+		for(int i = 0; i < ballen.size(); i++)
+		{
+			ballen.get(i).render(g);
+		}
 		
 		//shows the screen
 		g.dispose();
@@ -112,5 +123,15 @@ public class Main extends Canvas implements Runnable
 	private void update()
 	{
 		
+	}
+
+	public static boolean isValidPosition(int x, int y)
+	{
+		if(x <= Ball.size / 2 || x >= width - Ball.size / 2)
+			return false;
+		if(y <= Ball.size / 2 || y >= height - Ball.size / 2)
+			return false;
+		
+		return true;
 	}
 }
