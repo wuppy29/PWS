@@ -130,9 +130,9 @@ public class Main extends Canvas implements Runnable
 
 	public static boolean isValidPosition(int x, int y)
 	{
-		if(x <= Ball.size / 2 || x >= width - Ball.size / 2)
+		if(x <= 0 || x >= width - Ball.size)
 			return false;
-		if(y <= Ball.size / 2 || y >= height - Ball.size / 2)
+		if(y <= 0 || y >= height - Ball.size * 2)
 			return false;
 		if(isBallInPosition(x, y))
 			return false;
@@ -147,11 +147,10 @@ public class Main extends Canvas implements Runnable
 			Ball ball = ballen.get(i);
 			double bx = ball.getX();
 			double by = ball.getY();
-			int size = Ball.size / 2;
 			
-			if(bx >= x - size && bx <= x + size)
+			if(x >= bx - Ball.size && x <= bx + Ball.size)
 			{
-				if(by >= x - size && by <= y + size)
+				if(y >= by - Ball.size && y <= by + Ball.size)
 				{
 					return true;
 				}
