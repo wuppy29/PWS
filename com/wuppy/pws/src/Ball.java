@@ -19,6 +19,7 @@ public class Ball
 		r = rand.nextFloat();
 		gr = rand.nextFloat();
 		b = rand.nextFloat();
+		vy = 1;
 	}
 	
 	public void render(Graphics g)
@@ -29,7 +30,17 @@ public class Ball
 	
 	public void update()
 	{
-		y++;
+		x += vx;
+		y += vy;
+		
+		if(y + size * 2 >= Main.height && vy > 0)
+			vy = -1;
+		if(y <= 0 && vy < 0)
+			vy = 1;
+		if(x <= 0 && vx < 0)
+			vx = 1;
+		if(x + size >= Main.width && vx > 0)
+			vx = -1;
 	}
 	
 	public double getX()
