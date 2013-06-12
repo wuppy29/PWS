@@ -46,7 +46,7 @@ public class Main extends Canvas implements Runnable
 		}
 		else
 		{
-			ballen.add(new Ball(50, 50));
+			ballen.add(new Ball(50, 50, 0));
 			addMouseListener(new MouseHandler());
 			running = true;
 			thread = new Thread(this);
