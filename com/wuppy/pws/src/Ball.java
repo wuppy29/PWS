@@ -11,7 +11,13 @@ public class Ball
 	static int size = 25;
 	float r, gr, b;
 	int id;
+	
+	double gra = 9.81;
+	double weight = 0.0425;
+	double Fz = gra * weight;
 
+	boolean started = true;
+	
 	public Ball(int x, int y, int id)
 	{
 		this.x = x;
@@ -21,7 +27,6 @@ public class Ball
 		r = rand.nextFloat();
 		gr = rand.nextFloat();
 		b = rand.nextFloat();
-		vy = 1;
 	}
 
 	public void render(Graphics g)
@@ -32,18 +37,24 @@ public class Ball
 
 	public void update()
 	{
+		if(started)
+		{
+			vy = Fz * Main.dt;
+			started = false;
+		}
+		
 		x += vx;
 		y += vy;
-
+		
 		if (y + size * 2 >= Main.height && vy > 0)
 			vy = -1;
 		if (y <= 0 && vy < 0)
-			vy = 1;
+			vy = Fz * Main.dt;
 		if (x <= 0 && vx < 0)
 			vx = 1;
 		if (x + size >= Main.width && vx > 0)
 			vx = -1;
-
+		
 		for (int i = 0; i < Main.ballen.size(); i++)
 		{
 			if(i != id)
@@ -54,5 +65,15 @@ public class Ball
 					vy = -vy;
 			}
 		}
+	}
+
+	public double getX()
+	{
+		return x;
+	}
+
+	public double getY()
+	{
+		return y;
 	}
 }

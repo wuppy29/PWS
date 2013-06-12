@@ -22,6 +22,10 @@ public class Main extends Canvas implements Runnable
 	
 	static List<Ball> ballen = new ArrayList<Ball>();
 	
+	static double ups = 60.0;
+	
+	static double dt = 1 / ups;
+	
 	public static void main(String[] args)
 	{
 		Main main = new Main();
@@ -59,7 +63,7 @@ public class Main extends Canvas implements Runnable
 		int frames = 0;
 		double unprocessedSeconds = 0;
 		long previousTime = System.nanoTime();
-		double secondsPerTick = 1 / 60.0;
+		double secondsPerTick = 1 / ups;
 		int tickCount = 0;
 		boolean ticked = false;
 
@@ -70,14 +74,15 @@ public class Main extends Canvas implements Runnable
 			long passedTime = currentTime - previousTime;
 			previousTime = currentTime;
 			unprocessedSeconds += passedTime / 1000000000.0;
-
+			
 			while (unprocessedSeconds > secondsPerTick)
 			{
 				update();
 				unprocessedSeconds -= secondsPerTick;
 				ticked = true;
 				tickCount++;
-				if (tickCount % 60 == 0)
+				
+				if (tickCount % ups == 0)
 				{
 					System.out.println(frames + " fps");
 					previousTime += 1000;
