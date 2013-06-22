@@ -11,12 +11,18 @@ public class Ball
 	static int size = 25;
 	float r, gr, b;
 	int id;
+	int scale = 10;
 	
 	double gra = 9.81;
 	double weight = 0.0425;
+	
+	double k = 0.47;
+	
 	double Fz = gra * weight;
-
-	boolean started = true;
+	double Fwr = 0;
+	double Fres = Fz - Fwr;
+	
+	double a = Fres / weight;
 	
 	public Ball(int x, int y, int id)
 	{
@@ -27,6 +33,7 @@ public class Ball
 		r = rand.nextFloat();
 		gr = rand.nextFloat();
 		b = rand.nextFloat();
+		vy = a * Main.dt * scale;
 	}
 
 	public void render(Graphics g)
@@ -37,19 +44,15 @@ public class Ball
 
 	public void update()
 	{
-		if(started)
-		{
-			vy = Fz * Main.dt;
-			started = false;
-		}
+		calculateForces();
 		
 		x += vx;
 		y += vy;
 		
 		if (y + size * 2 >= Main.height && vy > 0)
-			vy = -1;
+			vy = -a * Main.dt * scale;
 		if (y <= 0 && vy < 0)
-			vy = Fz * Main.dt;
+			vy = a * Main.dt * scale;
 		if (x <= 0 && vx < 0)
 			vx = 1;
 		if (x + size >= Main.width && vx > 0)
@@ -65,6 +68,12 @@ public class Ball
 					vy = -vy;
 			}
 		}
+	}
+
+	private void calculateForces()
+	{
+		Fwr = k * vy * vy;
+		Fres = Fz - Fwr;
 	}
 
 	public double getX()

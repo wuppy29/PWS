@@ -3,10 +3,12 @@ package com.wuppy.pws.src;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Main extends Canvas implements Runnable
@@ -18,13 +20,15 @@ public class Main extends Canvas implements Runnable
 	private Thread thread;
 	
 	static int width = 600;
-	static int height = 600;
+	static int height = 625;
 	
 	static List<Ball> ballen = new ArrayList<Ball>();
 	
 	static double ups = 60.0;
 	
 	static double dt = 1 / ups;
+	
+	Image background;
 	
 	public static void main(String[] args)
 	{
@@ -50,7 +54,9 @@ public class Main extends Canvas implements Runnable
 		}
 		else
 		{
-			ballen.add(new Ball(50, 50, 0));
+			ImageIcon backimg = new ImageIcon(this.getClass().getResource("/size.png"));
+			background = backimg.getImage();
+			ballen.add(new Ball(60, 50, 0));
 			addMouseListener(new MouseHandler());
 			running = true;
 			thread = new Thread(this);
@@ -115,6 +121,8 @@ public class Main extends Canvas implements Runnable
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
 		
+		g.drawImage(background, 0, 0, null);
+		
 		for(int i = 0; i < ballen.size(); i++)
 		{
 			ballen.get(i).render(g);
@@ -135,7 +143,7 @@ public class Main extends Canvas implements Runnable
 
 	public static boolean isValidPosition(int x, int y)
 	{
-		if(x <= 0 || x >= width - Ball.size)
+		if(x <= 60 || x >= width - Ball.size)
 			return false;
 		if(y <= 0 || y >= height - Ball.size * 2)
 			return false;
