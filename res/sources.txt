@@ -3,10 +3,15 @@ Sources:
 http://en.wikipedia.org/wiki/Free_fall#Uniform_gravitational_field_without_air_resistance
 http://en.wikipedia.org/wiki/Elastic_collision#One-dimensional_Newtonian
 http://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods
-http://en.wikipedia.org/wiki/Numerical_integration
+http://en.wikipedia.org/wiki/Equations_for_a_falling_body
 
 Choices
 - Uniform gravitational field with air resistance
 - balls are perfect spheres
 - air temperature 20 C
 - Neglect buoyancy
+
+Todo:
+Tabel met locatie etc. In scherm
+Kanten botsen
+Ballen botsen

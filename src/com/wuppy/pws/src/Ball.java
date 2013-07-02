@@ -13,13 +13,15 @@ public class Ball
 	int id;
 	int scale = 100;
 	
+	double t = 0;
+	
 	double g = 9.81;
 	double m = 0.0425;
 	double rho = 1.2041;
 	double Cd = 0.45;
 	double A = 4 * Math.PI * Math.pow(size /2, 2);
 	
-	double terminalSpeed = Math.sqrt((2 * m * g) / (rho * Cd * A));
+	double terminalSpeed = Math.sqrt((2 * m * g) / (rho * Cd * A)) * scale;
 	//vy = terminalSpeed * Math.tanh(g * Main.dt / terminalSpeed) * scale;
 	
 	public Ball(int x, int y, int id)
@@ -41,6 +43,12 @@ public class Ball
 
 	public void update()
 	{
+		t += Main.dt;
+		
+		vy = g * t;
+		if(vy >= terminalSpeed)
+			vy = terminalSpeed;
+		
 		x += vx;
 		y += vy;
 		
