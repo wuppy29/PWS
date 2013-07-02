@@ -7,7 +7,7 @@ import java.util.Random;
 public class Ball
 {
 	double x, y;
-	double vx, vy;
+	double vx = 0, vy = 0;
 	static int size = 25;
 	float r, gr, b;
 	int id;
@@ -20,6 +20,7 @@ public class Ball
 	double A = 4 * Math.PI * Math.pow(size /2, 2);
 	
 	double terminalSpeed = Math.sqrt((2 * m * g) / (rho * Cd * A));
+	//vy = terminalSpeed * Math.tanh(g * Main.dt / terminalSpeed) * scale;
 	
 	public Ball(int x, int y, int id)
 	{
@@ -30,8 +31,6 @@ public class Ball
 		r = rand.nextFloat();
 		gr = rand.nextFloat();
 		b = rand.nextFloat();
-		vy = 1 * terminalSpeed * Math.tanh(g * Main.dt / terminalSpeed) * scale;
-		System.out.println(vy + " " + terminalSpeed);
 	}
 
 	public void render(Graphics g)

@@ -19,8 +19,8 @@ public class Main extends Canvas implements Runnable
 	public static boolean running = false;
 	private Thread thread;
 	
-	static int width = 600;
-	static int height = 625;
+	static int width = 1280;
+	static int height = 720;
 	
 	static List<Ball> ballen = new ArrayList<Ball>();
 	
@@ -56,7 +56,7 @@ public class Main extends Canvas implements Runnable
 		{
 			ImageIcon backimg = new ImageIcon(this.getClass().getResource("/size.png"));
 			background = backimg.getImage();
-			ballen.add(new Ball(60, 50, 0));
+			ballen.add(new Ball(200, 70, 0));
 			addMouseListener(new MouseHandler());
 			running = true;
 			thread = new Thread(this);
@@ -121,7 +121,7 @@ public class Main extends Canvas implements Runnable
 		g.setColor(Color.black);
 		g.fillRect(0, 0, width, height);
 		
-		g.drawImage(background, 0, 0, null);
+		g.drawImage(background, 50, 50, null);
 		
 		for(int i = 0; i < ballen.size(); i++)
 		{
@@ -143,9 +143,9 @@ public class Main extends Canvas implements Runnable
 
 	public static boolean isValidPosition(int x, int y)
 	{
-		if(x <= 60 || x >= width - Ball.size)
+		if(x <= 110 || x >= 710 - Ball.size)
 			return false;
-		if(y <= 0 || y >= height - Ball.size * 2)
+		if(y <= 53 || y >= 653 - Ball.size)
 			return false;
 		if(isBallInPosition(x, y))
 			return false;
