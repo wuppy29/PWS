@@ -5,11 +5,14 @@ http://en.wikipedia.org/wiki/Elastic_collision#One-dimensional_Newtonian
 http://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods
 http://en.wikipedia.org/wiki/Equations_for_a_falling_body
 
+http://en.wikipedia.org/wiki/Buoyancy
+http://en.wikipedia.org/wiki/Drag_(physics)
+http://en.wikipedia.org/wiki/Gravity
+
 Choices
 - Uniform gravitational field with air resistance
 - balls are perfect spheres
 - air temperature 20 C
-- Neglect buoyancy
 
 Todo:
 Tabel met locatie etc. In scherm

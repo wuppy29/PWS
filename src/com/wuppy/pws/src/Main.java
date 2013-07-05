@@ -30,6 +30,11 @@ public class Main extends Canvas implements Runnable
 	
 	Image background;
 	
+	static int left = 110;
+	static int right = 710;
+	static int top = 53;
+	static int bottom = 653;
+	
 	public static void main(String[] args)
 	{
 		Main main = new Main();
@@ -128,6 +133,8 @@ public class Main extends Canvas implements Runnable
 			ballen.get(i).render(g);
 		}
 		
+		RenderTable.render(g, ballen.get(0));
+		
 		//shows the screen
 		g.dispose();
 		bs.show();
@@ -143,9 +150,9 @@ public class Main extends Canvas implements Runnable
 
 	public static boolean isValidPosition(int x, int y)
 	{
-		if(x <= 110 || x >= 710 - Ball.size)
+		if(x <= left || x >= right - Ball.size)
 			return false;
-		if(y <= 53 || y >= 653 - Ball.size)
+		if(y <= top || y >= bottom - Ball.size)
 			return false;
 		if(isBallInPosition(x, y))
 			return false;
