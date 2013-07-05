@@ -61,7 +61,7 @@ public class Main extends Canvas implements Runnable
 		{
 			ImageIcon backimg = new ImageIcon(this.getClass().getResource("/size.png"));
 			background = backimg.getImage();
-			ballen.add(new Ball(200, 70, 0));
+			ballen.add(new Ball(200, 300, 0));
 			addMouseListener(new MouseHandler());
 			running = true;
 			thread = new Thread(this);

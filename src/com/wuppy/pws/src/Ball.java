@@ -27,11 +27,7 @@ public class Ball
 	double Fb = rho * V * g;
 	
 	double a = 0;
-	
-	
-	double terminalSpeed = Math.sqrt((2 * m * g) / (rho * Cd * A));
 	double t = 0;
-	
 	
 	public Ball(int x, int y, int id)
 	{
@@ -52,27 +48,40 @@ public class Ball
 	
 	public void update()
 	{
+		//forces
 		calculateForces();
 		
+		//time
 		t += Main.dt;
 		
-		//vy = g * t;
-		//if(vy >= terminalSpeed)
-		//	vy = terminalSpeed;
+		//speed
 		vy += a * Main.dt;
 		
+		//outside check
+		if(y > Main.bottom - size + 3)
+			vy = 0;
+		if(y < Main.top - 3)
+			vy = 0;
+		if(x > Main.right - size + 3)
+			vx = 0;
+		if(x < Main.left - 3)
+			vx = 0;
+		
+		//movement
 		x += vx;
 		y += vy;
 		
-		if (y + size * 2 >= Main.bottom && vy > 0)
+		//bounce sides
+		if (y + size * 2 >= Main.bottom + size)
 			vy = -vy;
-		if (y <= 0)
+		if (y <= Main.top)
 			vy = 1;
 		if (x <= 0)
 			vx = 1;
 		if (x + size >= Main.width && vx > 0)
 			vx = -1;
 		
+		//bounce between balls
 		for (int i = 0; i < Main.ballen.size(); i++)
 		{
 			if(i != id)
@@ -80,7 +89,9 @@ public class Ball
 				double distance = Math.sqrt(Math.pow((x + (size/2)) - (Main.ballen.get(i).x + (size/2)), 2) + Math.pow((y + (size/2)) - (Main.ballen.get(i).y + (size/2)), 2));
 				
 				if(distance <= size)
+				{
 					vy = -vy;
+				}
 			}
 		}
 	}
