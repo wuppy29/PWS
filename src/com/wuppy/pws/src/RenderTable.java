@@ -21,5 +21,7 @@ public class RenderTable
 		g.drawString("X Speed" + new DecimalFormat("#.##").format(ball.vx), 750, 70);
 		
 		g.drawString("Y Speed" + new DecimalFormat("#.##").format(ball.vy), 750, 80);
+		
+		g.drawString("id " + ball.id, 750 , 90);
 	}
 }

@@ -7,7 +7,13 @@ public class MouseHandler implements MouseListener
 {
 	public void mouseClicked(MouseEvent e)
 	{
-		
+		if(e.getButton() == 2)
+		{
+			if(Main.isBallInPosition(e.getX(), e.getY()))
+			{
+				Main.ballId = Main.getBallAtPosition(e.getX(), e.getY());
+			}
+		}
 	}
 	
 	public void mouseEntered(MouseEvent e)
@@ -30,7 +36,7 @@ public class MouseHandler implements MouseListener
 		int mousex = e.getX();
 		int mousey = e.getY();
 		
-		if(Main.isValidPosition(mousex, mousey))
+		if(Main.isValidPosition(mousex, mousey) && e.getButton() == 1)
 		{
 			Main.ballen.add(new Ball(mousex, mousey, Main.ballen.size()));
 		}

@@ -35,6 +35,8 @@ public class Main extends Canvas implements Runnable
 	static int top = 53;
 	static int bottom = 653;
 	
+	static int ballId = 0;
+	
 	public static void main(String[] args)
 	{
 		Main main = new Main();
@@ -133,7 +135,7 @@ public class Main extends Canvas implements Runnable
 			ballen.get(i).render(g);
 		}
 		
-		RenderTable.render(g, ballen.get(0));
+		RenderTable.render(g, ballen.get(ballId));
 		
 		//shows the screen
 		g.dispose();
@@ -177,5 +179,25 @@ public class Main extends Canvas implements Runnable
 			}
 		}
 		return false;
+	}
+	
+	public static int getBallAtPosition(int x, int y)
+	{
+		for(int i = 0; i < ballen.size(); i++)
+		{
+			Ball ball = ballen.get(i);
+			
+			double bx = ball.getX();
+			double by = ball.getY();
+			
+			if(x >= bx && x < bx + Ball.size)
+			{
+				if(y >= by && by < by + Ball.size)
+				{
+					return ball.id;
+				}
+			}
+		}
+		return ballId;
 	}
 }
