@@ -57,19 +57,28 @@ public class Ball
 		//speed
 		vy += a * Main.dt;
 		
-		//outside check
-		if(y > Main.bottom - size + 3)
-			vy = 0;
-		if(y < Main.top - 3)
-			vy = 0;
-		if(x > Main.right - size + 3)
-			vx = 0;
-		if(x < Main.left - 3)
-			vx = 0;
-		
 		//movement
-		x += vx;
-		y += vy;
+		if(vy > 0 && y + vy > Main.bottom - size)
+		{
+			y = Main.bottom - size;
+		}
+		else if(vy < 0 && y - vy < Main.top)
+		{
+			y = Main.top;
+		}
+		else
+			y += vy;
+		
+		if(vx > 0 && x + vx > Main.right - size)
+		{
+			x = Main.right;
+		}
+		else if(vx < 0 && x - vx < Main.left)
+		{
+			x = Main.left;
+		}
+		else
+			x += vx;
 		
 		//bounce sides
 		if (y + size * 2 >= Main.bottom + size)
