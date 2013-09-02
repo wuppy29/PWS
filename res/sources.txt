@@ -15,6 +15,9 @@ Choices
 - air temperature 20 C
 
 Todo:
-Tabel met locatie etc. In scherm
-Kanten botsen
-Ballen botsen
+- Ballen onderaan niet in elkaar
+- Ballen stuiteren in hoeken
+
+
+Hoe bereken je phi (qp) & theha (0)
+http://williamecraver.wix.com/elastic-equations

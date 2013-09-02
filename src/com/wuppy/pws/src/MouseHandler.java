@@ -7,7 +7,7 @@ public class MouseHandler implements MouseListener
 {
 	public void mouseClicked(MouseEvent e)
 	{
-		if(e.getButton() == 2)
+		if(e.getButton() == 3)
 		{
 			if(Main.isBallInPosition(e.getX(), e.getY()))
 			{

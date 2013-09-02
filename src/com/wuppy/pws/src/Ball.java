@@ -99,7 +99,14 @@ public class Ball
 				
 				if(distance <= size)
 				{
-					vy = -vy;
+				    double vys1 = vy, vys2 = Main.ballen.get(i).vy, vye1 = 0, vye2 = 0; //vy start of ball 1, vy start of ball 2, vy end ball 1, vy end ball 2
+				    double m2 = Main.ballen.get(i).m;
+				    
+				    vye1 = (vys1 * (m - m2) + 2 * m2 * vys2) / (m + m2);
+				    vye2 = (vys2 * (m2 - m) + 2 * m * vys1) / (m2 + m);
+				    
+				    Main.ballen.get(i).vy = vye2;
+				    vy = vye1;
 				}
 			}
 		}
