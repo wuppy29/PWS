@@ -36,9 +36,9 @@ public class MouseHandler implements MouseListener
 		int mousex = e.getX();
 		int mousey = e.getY();
 		
-		if(Main.isValidPosition(mousex, mousey) && e.getButton() == 1)
+		if(Main.isValidPosition(mousex, mousey, Main.ballSize) && e.getButton() == 1)
 		{
-			Main.ballen.add(new Ball(mousex, mousey, Main.ballen.size()));
+			Main.ballen.add(new Ball(mousex, mousey, Main.ballen.size(), Main.ballSize));
 		}
 	}
 }

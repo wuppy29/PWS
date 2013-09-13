@@ -36,6 +36,7 @@ public class Main extends Canvas implements Runnable
 	static int bottom = 653;
 	
 	static int ballId = 0;
+	static int ballSize = 25;
 	
 	public static void main(String[] args)
 	{
@@ -63,7 +64,7 @@ public class Main extends Canvas implements Runnable
 		{
 			ImageIcon backimg = new ImageIcon(this.getClass().getResource("/size.png"));
 			background = backimg.getImage();
-			ballen.add(new Ball(200, 300, 0));
+			ballen.add(new Ball(200, 300, 0, ballSize));
 			addMouseListener(new MouseHandler());
 			running = true;
 			thread = new Thread(this);
@@ -150,11 +151,11 @@ public class Main extends Canvas implements Runnable
 		}
 	}
 
-	public static boolean isValidPosition(int x, int y)
+	public static boolean isValidPosition(int x, int y, int ballSize)
 	{
-		if(x <= left || x >= right - Ball.size)
+		if(x <= left || x >= right - ballSize)
 			return false;
-		if(y <= top || y >= bottom - Ball.size)
+		if(y <= top || y >= bottom - ballSize)
 			return false;
 		if(isBallInPosition(x, y))
 			return false;
@@ -170,9 +171,9 @@ public class Main extends Canvas implements Runnable
 			double bx = ball.getX();
 			double by = ball.getY();
 			
-			if(x >= bx - Ball.size && x <= bx + Ball.size)
+			if(x >= bx - ball.size && x <= bx + ball.size)
 			{
-				if(y >= by - Ball.size && y <= by + Ball.size)
+				if(y >= by - ball.size && y <= by + ball.size)
 				{
 					return true;
 				}
@@ -190,9 +191,9 @@ public class Main extends Canvas implements Runnable
 			double bx = ball.getX();
 			double by = ball.getY();
 			
-			if(x >= bx && x < bx + Ball.size)
+			if(x >= bx && x < bx + ball.size)
 			{
-				if(y >= by && by < by + Ball.size)
+				if(y >= by && by < by + ball.size)
 				{
 					return ball.id;
 				}

@@ -9,8 +9,8 @@ public class Ball
     double x, y;
     double vx = 0, vy = 0;
     double dir = 0;
-    static int size = 25;
-    static double radius = (double) size / 2D / 100D;
+    int size;
+    double radius = (double) size / 2D / 100D;
     float r, gr, b;                                            //random kleur
     int id;
     int scale = 100;
@@ -30,11 +30,12 @@ public class Ball
     double a = 0;
     double t = 0;
 
-    public Ball(int x, int y, int id)
+    public Ball(int x, int y, int id, int size)
     {
         this.x = x;
         this.y = y;
         this.id = id;
+        this.size = size;
         Random rand = new Random();
         r = rand.nextFloat();
         gr = rand.nextFloat();
@@ -74,11 +75,11 @@ public class Ball
         else
             y += vy;
 
-        if (vx > 0 && x + vx > Main.right - size)
+        if (x + vx > Main.right - size)
         {
-            x = Main.right;
+            x = Main.right - size;
         }
-        else if (vx < 0 && x - vx < Main.left)
+        else if (vx < 0 && x + vx < Main.left)
         {
             x = Main.left;
         }
@@ -90,9 +91,9 @@ public class Ball
             vy = -vy;
         if (y <= Main.top)
             vy = -vy;
-        if (x <= 0)
+        if (x <= Main.left)
             vx = -vx;
-        if (x + size >= Main.width && vx > 0)
+        if (x + size >= Main.right && vx > 0)
             vx = -vx;
 
         //bounce between balls
@@ -102,7 +103,7 @@ public class Ball
             {
                 Ball b2 = Main.ballen.get(i);
 
-                double distance = Math.sqrt(Math.pow((x + (size / 2)) - (b2.x + (size / 2)), 2) + Math.pow((y + (size / 2)) - (b2.y + (size / 2)), 2));
+                double distance = Math.sqrt(Math.pow((x + (size / 2)) - (b2.x + (b2.size / 2)), 2) + Math.pow((y + (size / 2)) - (b2.y + (b2.size / 2)), 2));
 
                 if (distance <= size && b2.dir - dir < 180)
                 {
@@ -117,13 +118,13 @@ public class Ball
                     //totale snelheid b en b2
                     double v1 = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
                     double v2 = Math.sqrt(Math.pow(b2.vx, 2) + Math.pow(b2.vy, 2));
-                    
+
                     //gewicht tweede bal
                     double m2 = b2.m;
 
                     double vxe1 = ((((v1 * Math.cos(dir - difdir)) * (m - m2) + 2 * m2 * (v2 * Math.cos(b2.dir - difdir)))) / (m + m2)) * Math.cos(difdir) + (v1 * Math.sin(dir - difdir) * Math.cos(difdir + (Math.PI / 2)));
                     double vye1 = ((((v1 * Math.cos(dir - difdir)) * (m - m2) + 2 * m2 * (v2 * Math.cos(b2.dir - difdir)))) / (m + m2)) * Math.sin(difdir) + (v1 * Math.sin(dir - difdir) * Math.sin(difdir + (Math.PI / 2)));
-                    
+
                     double vxe2 = ((((v2 * Math.cos(b2.dir - difdir)) * (m2 - m) + 2 * m * (v1 * Math.cos(dir - difdir)))) / (m + m2)) * Math.cos(difdir) + (v2 * Math.sin(b2.dir - difdir) * Math.cos(difdir + (Math.PI / 2)));
                     double vye2 = ((((v2 * Math.cos(b2.dir - difdir)) * (m2 - m) + 2 * m * (v1 * Math.cos(dir - difdir)))) / (m + m2)) * Math.sin(difdir) + (v2 * Math.sin(b2.dir - difdir) * Math.sin(difdir + (Math.PI / 2)));
 
@@ -138,9 +139,14 @@ public class Ball
 
     public void calculateForces()
     {
-        Fd = 0.5 * rho * Math.pow(vy, 2) * Cd * A;
-
-        Fres = Fzw - Fd - Fb;
+        Fd = 0;//0.5 * rho * Math.pow(vy, 2) * Cd * A;
+        
+        if (vy > 0)
+        {
+            Fres = Fzw - Fd - Fb;
+        }
+        else
+            Fres = Fzw + Fd - Fb;
 
         a = Fres / m;
     }

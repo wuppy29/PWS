@@ -1,3 +1,7 @@
+- Ballen stoppen in elkaar vliegen
+- Eerst kijken welke ballen kracth op elkaar uitoefenen dan alle kracthen uitrekeken dan pas bewegen in ander project. Grote verscchillen? Beter?
+- Tabel Energie van alle ballen
+
 Sources:
 
 http://en.wikipedia.org/wiki/Free_fall#Uniform_gravitational_field_without_air_resistance
