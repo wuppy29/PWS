@@ -1,6 +1,8 @@
-- Ballen stoppen in elkaar vliegen
+- Ballen stoppen in elkaar vliegen (diffdir?)
 - Eerst kijken welke ballen kracth op elkaar uitoefenen dan alle kracthen uitrekeken dan pas bewegen in ander project. Grote verscchillen? Beter?
-- Tabel Energie van alle ballen
+- pauze mogenlijkheid (spacebar)
+
+- check: hoogte, snelheid, a, v, vy
 
 Sources:
 

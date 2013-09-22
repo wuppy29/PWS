@@ -25,6 +25,8 @@ public class Main extends Canvas implements Runnable
 	static List<Ball> ballen = new ArrayList<Ball>();
 	
 	static double ups = 60.0;
+	int sec = 0;
+	double totPot = 0, totKin = 0, totTot = 0;
 	
 	static double dt = 1 / ups;
 	
@@ -138,6 +140,8 @@ public class Main extends Canvas implements Runnable
 		
 		RenderTable.render(g, ballen.get(ballId));
 		
+		RenderTable.renderGraph(g);
+		
 		//shows the screen
 		g.dispose();
 		bs.show();
@@ -149,6 +153,8 @@ public class Main extends Canvas implements Runnable
 		{
 			ballen.get(i).update();
 		}
+		
+		RenderTable.addE(ballen.get(ballId).ePot, ballen.get(ballId).eKin, ballen.get(ballId).eTot);
 	}
 
 	public static boolean isValidPosition(int x, int y, int ballSize)

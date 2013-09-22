@@ -10,7 +10,7 @@ public class Ball
     double vx = 0, vy = 0;
     double dir = 0;
     int size;
-    double radius = (double) size / 2D / 100D;
+    double radius;
     float r, gr, b;                                            //random kleur
     int id;
     int scale = 100;
@@ -19,13 +19,15 @@ public class Ball
     double m = 0.0425;
     double rho = 1.2041;		//air density
     double Cd = 0.45;			//drag coeffecient
-    double A = 4D * Math.PI * Math.pow(radius, 2);
-    double V = 4D / 3D * Math.PI * Math.pow(radius, 3);
+    double A, V;
 
     double Fres = 0;
     double Fzw = g * m;
-    double Fd = 0.5 * rho * Math.pow(vy, 2) * Cd * A;
+    double Fd;
     double Fb = rho * V * g;
+
+    double eTot = 0;
+    double eKin, ePot;
 
     double a = 0;
     double t = 0;
@@ -36,6 +38,12 @@ public class Ball
         this.y = y;
         this.id = id;
         this.size = size;
+        
+        radius = (double) size / 2D / 100D;
+        V = 4D / 3D * Math.PI * Math.pow(radius, 3);
+        A = 4 * Math.PI * Math.pow(radius, 2);
+        Fd = 0.5 * rho * Math.pow(vy, 2) * Cd * A;
+        
         Random rand = new Random();
         r = rand.nextFloat();
         gr = rand.nextFloat();
@@ -55,10 +63,10 @@ public class Ball
 
         //time
         t += Main.dt;
-
+        
         //speed
         vy += a * Main.dt;
-
+        
         //direction
         dir = Math.atan2(vy, vx);
         dir = Math.toDegrees(dir);
@@ -135,8 +143,14 @@ public class Ball
                 }
             }
         }
+        
+        double tempv = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
+        double h = (600 + -y + 53 - (0.5 * size)) / 100;
+        eKin = 0.5 * m * Math.pow(tempv, 2);
+        ePot = m * g * h;
+        eTot = eKin + ePot;
     }
-
+    
     public void calculateForces()
     {
         Fd = 0;//0.5 * rho * Math.pow(vy, 2) * Cd * A;
@@ -146,8 +160,10 @@ public class Ball
             Fres = Fzw - Fd - Fb;
         }
         else
+        {
             Fres = Fzw + Fd - Fb;
-
+        }
+        
         a = Fres / m;
     }
 
